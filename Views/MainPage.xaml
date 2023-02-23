@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RoutingProjectNet.MainPage">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Center">
+
+            <Label
+                Text="Generated map goes here"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="32"
+                HorizontalOptions="Center" />
+
+            <Label
+                x:Name="StatusLabel"
+                Text="Current status is: Paused"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Current map status"
+                FontSize="18"
+                HorizontalOptions="Center" />
+            <HorizontalStackLayout
+                HorizontalOptions="Center">
+                <Button
+                    x:Name="GenMap"
+                    Text="Generate New Map"
+                    SemanticProperties.Hint="Creates a new map using the current settings"
+                    Clicked="GenMap_Clicked"
+                    HorizontalOptions="Center" />
+                <Button
+                    x:Name="SolveMap"
+                    Text="Determine best path"
+                    SemanticProperties.Hint="Determines the best path for the current map"
+                    Clicked="SolveMap_Clicked"
+                    HorizontalOptions="Center" />
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
