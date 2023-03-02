@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -95,11 +96,10 @@ namespace RoutingProjectNet.src
             positions = new Node[xDim, yDim];
         }
 
-        public Node[] getNeighbours(Node center)
+        public List<Node> getNeighbours(Node center)
         {
             //Since there can only be max 8 neighbours in a 2D context, any unused are set to null
-            Node[] neighbours = new Node[8];
-            int index = 0;
+            List<Node> neighbours = new();
             int x = center.GetCoords().x;
             int y = center.GetCoords().y;
             for(int i = x-1; i <= x+1; i++)
@@ -113,8 +113,7 @@ namespace RoutingProjectNet.src
                     }
                     else
                     {
-                        neighbours[index] = positions[i, j];
-                        index++;
+                        neighbours.Add(positions[i, j]);
                     }
                 }
             }

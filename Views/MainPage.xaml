@@ -15,6 +15,13 @@
                 FontSize="32"
                 HorizontalOptions="Center" />
 
+            <Grid RowDefinitions="*, *, *, *, *"
+                  ColumnDefinitions="*, *, *, *, *">
+
+                <Label BackgroundColor="red"/>
+                <Label Grid.Row="1" BackgroundColor="Green"/>
+            </Grid>
+
             <Label
                 x:Name="StatusLabel"
                 Text="Current status is: Paused"

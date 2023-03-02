@@ -122,5 +122,10 @@ namespace RoutingProjectNet.src
         {
             return includedPath;
         }
+
+        public void SetIncluded(bool included)
+        {
+            this.includedPath = included;
+        }
     }
 }
