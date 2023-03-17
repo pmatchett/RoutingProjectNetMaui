@@ -1,30 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RoutingProjectNet.MainPage">
+             x:Class="RoutingProjectNet.MainPage"
+             xmlns:viewModel="clr-namespace:RoutingProjectNet.ViewModels"
+             x:DataType="viewModel:MainViewModel"
+             xmlns:local="clr-namespace:RoutingProjectNet.DataConverters">
+    <ContentPage.Resources>
+        <local:NodetoColourConverter x:Key="NodeToColour"/>
+        <local:NodeToIncludedColourConverter x:Key="NodeToIncluded"/>
+        <local:NodeToXPositionConverter x:Key="NodeToX"/>
+        <local:NodeToYPositionConverter x:Key="NodeToY"/>
+    </ContentPage.Resources>
 
-    <ScrollView>
+    <ScrollView
+        VerticalOptions="FillAndExpand">
         <VerticalStackLayout
             Spacing="25"
             Padding="30,0"
             VerticalOptions="Center">
 
-            <Label
-                Text="Generated map goes here"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
 
-            <Grid RowDefinitions="*, *, *, *, *"
-                  ColumnDefinitions="*, *, *, *, *">
+            <Grid RowDefinitions="{Binding Rows}"
+                  ColumnDefinitions="{Binding Columns}"
+                  BindableLayout.ItemsSource="{Binding MapGrid}">
 
-                <Label BackgroundColor="red"/>
-                <Label Grid.Row="1" BackgroundColor="Green"/>
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate >
+                        <Rectangle Fill="{Binding ., Converter={StaticResource NodeToColour}}"
+                                   Stroke="{Binding ., Converter={StaticResource NodeToIncluded}}"
+                                   StrokeThickness="5"
+                                   WidthRequest="15" HeightRequest="15"
+                                   Grid.Column="{Binding ., Converter={StaticResource NodeToX}}"
+                                   Grid.Row="{Binding ., Converter={StaticResource NodeToY}}"/>
+                    </DataTemplate> 
+                </BindableLayout.ItemTemplate>
             </Grid>
 
             <Label
                 x:Name="StatusLabel"
-                Text="Current status is: Paused"
+                Text="{Binding LabelText}"
                 SemanticProperties.HeadingLevel="Level2"
                 SemanticProperties.Description="Current map status"
                 FontSize="18"
@@ -35,13 +49,13 @@
                     x:Name="GenMap"
                     Text="Generate New Map"
                     SemanticProperties.Hint="Creates a new map using the current settings"
-                    Clicked="GenMap_Clicked"
+                    Command="{Binding CreateMapCommand}"
                     HorizontalOptions="Center" />
                 <Button
                     x:Name="SolveMap"
                     Text="Determine best path"
                     SemanticProperties.Hint="Determines the best path for the current map"
-                    Clicked="SolveMap_Clicked"
+                    Command="{Binding SolveMapCommand}"
                     HorizontalOptions="Center" />
             </HorizontalStackLayout>
 

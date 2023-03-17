@@ -1,4 +1,5 @@
 ﻿using RoutingProjectNet.src;
+using RoutingProjectNet.ViewModels;
 
 namespace RoutingProjectNet;
 
@@ -6,9 +7,10 @@ public partial class MainPage : ContentPage
 {
 	//int count = 0;
 
-	public MainPage()
+	public MainPage(MainViewModel vm)
 	{
 		InitializeComponent();
+		BindingContext = vm;
 	}
 
 	//private void OnCounterClicked(object sender, EventArgs e)
@@ -23,16 +25,18 @@ public partial class MainPage : ContentPage
 	//	SemanticScreenReader.Announce(CounterBtn.Text);
 	//}
 
-	private void GenMap_Clicked(object sender, EventArgs e)
-    {
-		StatusLabel.Text = $"Current Status: Generating map.";
-		RoutingMap map = RoutingMap.GetMapInstance();
-		map.GenerateMap();
-    }
+	//private void GenMap_Clicked(object sender, EventArgs e)
+ //   {
+	//	StatusLabel.Text = $"Current Status: Generating map.";
+	//	RoutingMap map = RoutingMap.GetMapInstance();
+	//	map.GenerateMap();
+ //   }
 
-    private void SolveMap_Clicked(object sender, EventArgs e)
-    {
-        StatusLabel.Text = "Current Status: Solving map";
-    }
+  //  private void SolveMap_Clicked(object sender, EventArgs e)
+  //  {
+  //      StatusLabel.Text = "Current Status: Solving map";
+		//StaticRouter router = new();
+		//router.OptimizePath();
+  //  }
 }
 

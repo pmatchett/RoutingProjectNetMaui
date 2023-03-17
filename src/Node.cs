@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace RoutingProjectNet.src
 {
     //Enum to save the status of nodes
-    internal enum NodeStatus
+    public enum NodeStatus
     {
         Free,
         Obstacle,
@@ -15,7 +15,7 @@ namespace RoutingProjectNet.src
         End
     }
     //Struct to save the coordinates of a point
-    internal struct Point
+    public struct Point
     {
         public int x, y;
 
@@ -27,7 +27,7 @@ namespace RoutingProjectNet.src
     }
 
     //Class that stores the information about each Node in the routing map
-    internal class Node
+    public class Node
     {
         static private int counter = 0;
         private Point coords;

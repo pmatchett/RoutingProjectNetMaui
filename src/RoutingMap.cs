@@ -55,10 +55,10 @@ namespace RoutingProjectNet.src
 
             } while (xEnd == xStart && yEnd == yStart);
 
-            //Debug.WriteLine($"Start position: {xStart} {yStart}");
-            //Debug.WriteLine($"End position: {xEnd} {yEnd}");
+            Debug.WriteLine($"Start position: {xStart} {yStart}");
+            Debug.WriteLine($"End position: {xEnd} {yEnd}");
 
-            for(int i = 0; i < xDim; i++)
+            for (int i = 0; i < xDim; i++)
             {
                 for(int j = 0; j < yDim; j++)
                 {
@@ -90,6 +90,7 @@ namespace RoutingProjectNet.src
 
         private void InitNewMap()
         {
+            Node.ResetCounter();
             xDim = RoutingMap.xDimSettings;
             yDim = RoutingMap.yDimSettings;
             numNodes = xDim * yDim;
@@ -176,6 +177,11 @@ namespace RoutingProjectNet.src
                 return null;
             }
             return positions[x, y].GetIncluded();
+        }
+
+        public Node[,] GetNodes()
+        {
+            return positions;
         }
     }
 }

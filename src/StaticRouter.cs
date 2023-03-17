@@ -48,6 +48,7 @@ namespace RoutingProjectNet.src
             Node current = this.map.getEnd();
             while(current != null)
             {
+                Debug.WriteLine($"{current.GetCoords().x} {current.GetCoords().y}");
                 current.SetIncluded(true);
                 current = current.getPrevNode();
             }
@@ -91,6 +92,12 @@ namespace RoutingProjectNet.src
                 {
                     TracePath();
                     return true;
+                }
+
+                if(testNode == null)
+                {
+                    Debug.WriteLine("testNode was null");
+                    return false;
                 }
 
                 //The end has not been reached, remove current node from open list and add to closed list
