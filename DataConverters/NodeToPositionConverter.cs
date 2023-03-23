@@ -13,7 +13,7 @@ namespace RoutingProjectNet.DataConverters
             Node original = (Node)value;
             if (original == null)
             {
-                return null;
+                return 0;
             }
             return original.GetCoords().x;
         }
@@ -31,7 +31,7 @@ namespace RoutingProjectNet.DataConverters
             Node original = (Node)value;
             if (original == null)
             {
-                return null;
+                return 0;
             }
             return original.GetCoords().y;
         }

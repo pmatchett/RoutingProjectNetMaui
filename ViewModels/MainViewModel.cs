@@ -1,12 +1,8 @@
 ﻿
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui.Controls.Shapes;
 using RoutingProjectNet.src;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Xml.Serialization;
 
 namespace RoutingProjectNet.ViewModels
 {
@@ -45,28 +41,25 @@ namespace RoutingProjectNet.ViewModels
         [ObservableProperty]
         ObservableCollection<Node> _mapGrid;
 
-        [ObservableProperty]
-        Grid _completeMap;
-
 
 
 
         [RelayCommand]
-        void CreateMap()
+        async void CreateMap()
         {
             LabelText = "Generating map";
             RoutingMap map = RoutingMap.GetMapInstance();
-            map.GenerateMap();
+            await map.GenerateMap();
             UpdateMap();
             LabelText = "Map generated";
         }
 
         [RelayCommand]
-        void SolveMap()
+        async void SolveMap()
         {
             LabelText = "Solving map";
             StaticRouter router = new();
-            router.OptimizePath();
+            await router.OptimizePath();
             UpdateMap();
             LabelText = "Map solved";
         }

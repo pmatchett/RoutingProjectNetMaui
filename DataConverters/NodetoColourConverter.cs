@@ -11,7 +11,7 @@ namespace RoutingProjectNet.DataConverters
             Node original = (Node)value;
             if (original == null)
             {
-                return Colors.Purple;
+                return Colors.Transparent;
             }
             NodeStatus status = original.GetStatus();
             if (status == NodeStatus.Free)

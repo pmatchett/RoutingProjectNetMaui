@@ -38,7 +38,7 @@ namespace RoutingProjectNet.src
             return map;
         }
 
-        public void GenerateMap()
+        async public Task GenerateMap()
         {
             //Debug.WriteLine("Generating map");
             this.InitNewMap();
@@ -54,38 +54,39 @@ namespace RoutingProjectNet.src
                 yEnd = rand.Next(0, yDim);
 
             } while (xEnd == xStart && yEnd == yStart);
+            
 
-            Debug.WriteLine($"Start position: {xStart} {yStart}");
-            Debug.WriteLine($"End position: {xEnd} {yEnd}");
-
-            for (int i = 0; i < xDim; i++)
+            await Task.Run(() =>
             {
-                for(int j = 0; j < yDim; j++)
+                for (int i = 0; i < xDim; i++)
                 {
-                    if(i == xStart && j == yStart)
+                    for (int j = 0; j < yDim; j++)
                     {
-                        positions[i, j] = new Node(i, j, NodeStatus.Start);
-                        start = positions[i, j];
-                    }
-                    else if(i == xEnd && j == yEnd)
-                    {
-                        positions[i, j] = new Node(i, j, NodeStatus.End);
-                        end = positions[i, j];
-                    }
-                    else
-                    {
-                        double obstacle = rand.NextDouble();
-                        if(obstacle < obsPercentSettings)
+                        if (i == xStart && j == yStart)
                         {
-                            positions[i, j] = new Node(i, j, NodeStatus.Obstacle);
+                            positions[i, j] = new Node(i, j, NodeStatus.Start);
+                            start = positions[i, j];
+                        }
+                        else if (i == xEnd && j == yEnd)
+                        {
+                            positions[i, j] = new Node(i, j, NodeStatus.End);
+                            end = positions[i, j];
                         }
                         else
                         {
-                            positions[i, j] = new Node(i, j, NodeStatus.Free);
+                            double obstacle = rand.NextDouble();
+                            if (obstacle < obsPercentSettings)
+                            {
+                                positions[i, j] = new Node(i, j, NodeStatus.Obstacle);
+                            }
+                            else
+                            {
+                                positions[i, j] = new Node(i, j, NodeStatus.Free);
+                            }
                         }
                     }
                 }
-            }
+            });
         }
 
         private void InitNewMap()
